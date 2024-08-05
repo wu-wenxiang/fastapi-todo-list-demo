@@ -1,0 +1,750 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "todolist",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/api/v1/hello/{hello_id}": {
+            "get": {
+                "tags": [
+                    "Hello"
+                ],
+                "summary": "Root",
+                "operationId": "root_api_v1_hello__hello_id__get",
+                "parameters": [
+                    {
+                        "name": "hello_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Hello Id"
+                        }
+                    },
+                    {
+                        "name": "X-Auth-Token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "X-Auth-Token"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/todoelems": {
+            "post": {
+                "tags": [
+                    "Todoelems"
+                ],
+                "summary": "Todoelem Create",
+                "description": "Create a new todoelem.",
+                "operationId": "todoelem_create_api_v1_todoelems_post",
+                "parameters": [
+                    {
+                        "name": "X-Auth-Token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "X-Auth-Token"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_todoelem_create_api_v1_todoelems_post"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoelemCreateResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Todoelems"
+                ],
+                "summary": "Todoelems List",
+                "description": "List todoelems.",
+                "operationId": "todoelems_list_api_v1_todoelems_get",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Name of the todoelem",
+                            "title": "Name"
+                        },
+                        "description": "Name of the todoelem"
+                    },
+                    {
+                        "name": "X-Auth-Token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "X-Auth-Token"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoelemListResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/todoelems/{todoelem_id}": {
+            "get": {
+                "tags": [
+                    "Todoelems"
+                ],
+                "summary": "Todoelem Show",
+                "description": "Show todoelem.",
+                "operationId": "todoelem_show_api_v1_todoelems__todoelem_id__get",
+                "parameters": [
+                    {
+                        "name": "todoelem_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "description": "ID of the todoelem",
+                            "title": "Todoelem Id"
+                        },
+                        "description": "ID of the todoelem"
+                    },
+                    {
+                        "name": "X-Auth-Token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "X-Auth-Token"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoelemShowResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Todoelems"
+                ],
+                "summary": "Todoelem Update",
+                "description": "Update operation node.",
+                "operationId": "todoelem_update_api_v1_todoelems__todoelem_id__put",
+                "parameters": [
+                    {
+                        "name": "todoelem_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "description": "ID of the todoelem",
+                            "title": "Todoelem Id"
+                        },
+                        "description": "ID of the todoelem"
+                    },
+                    {
+                        "name": "X-Auth-Token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "X-Auth-Token"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_todoelem_update_api_v1_todoelems__todoelem_id__put"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoelemUpdateResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Todoelems"
+                ],
+                "summary": "Todoelem Delete",
+                "description": "Delete a todoelem.",
+                "operationId": "todoelem_delete_api_v1_todoelems__todoelem_id__delete",
+                "parameters": [
+                    {
+                        "name": "todoelem_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "description": "ID of the todoelem",
+                            "title": "Todoelem Id"
+                        },
+                        "description": "ID of the todoelem"
+                    },
+                    {
+                        "name": "X-Auth-Token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "X-Auth-Token"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Body_todoelem_create_api_v1_todoelems_post": {
+                "properties": {
+                    "todoelem": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/TodoelemCreate"
+                            }
+                        ],
+                        "description": "Todoelem to create"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "todoelem"
+                ],
+                "title": "Body_todoelem_create_api_v1_todoelems_post"
+            },
+            "Body_todoelem_update_api_v1_todoelems__todoelem_id__put": {
+                "properties": {
+                    "todoelem": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/TodoelemUpdate"
+                            }
+                        ],
+                        "description": "Todoelem to update"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "todoelem"
+                ],
+                "title": "Body_todoelem_update_api_v1_todoelems__todoelem_id__put"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "TodoelemCreate": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": ""
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description",
+                        "description": ""
+                    }
+                },
+                "type": "object",
+                "title": "TodoelemCreate"
+            },
+            "TodoelemCreateResponse": {
+                "properties": {
+                    "todoelem": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/TodoelemCreateResponseBase"
+                            }
+                        ],
+                        "description": "Todoelem"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "todoelem"
+                ],
+                "title": "TodoelemCreateResponse"
+            },
+            "TodoelemCreateResponseBase": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": ""
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description",
+                        "description": ""
+                    },
+                    "id": {
+                        "type": "integer",
+                        "title": "Id",
+                        "description": ""
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At",
+                        "description": "Creation time"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At",
+                        "description": "Update time"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "title": "TodoelemCreateResponseBase"
+            },
+            "TodoelemListResponse": {
+                "properties": {
+                    "todoelems": {
+                        "items": {
+                            "$ref": "#/components/schemas/TodoelemResponseBase"
+                        },
+                        "type": "array",
+                        "title": "Todoelems",
+                        "description": "List of todoelems"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "todoelems"
+                ],
+                "title": "TodoelemListResponse"
+            },
+            "TodoelemResponseBase": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id",
+                        "description": ""
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": ""
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description",
+                        "description": ""
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At",
+                        "description": "Creation time"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At",
+                        "description": "Update time"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "title": "TodoelemResponseBase"
+            },
+            "TodoelemShowResponse": {
+                "properties": {
+                    "todoelem": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/TodoelemResponseBase"
+                            }
+                        ],
+                        "description": "Todoelem"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "todoelem"
+                ],
+                "title": "TodoelemShowResponse"
+            },
+            "TodoelemUpdate": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": ""
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description",
+                        "description": ""
+                    }
+                },
+                "type": "object",
+                "title": "TodoelemUpdate"
+            },
+            "TodoelemUpdateResponse": {
+                "properties": {
+                    "todoelem": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/TodoelemUpdateResponseBase"
+                            }
+                        ],
+                        "description": "Todoelem"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "todoelem"
+                ],
+                "title": "TodoelemUpdateResponse"
+            },
+            "TodoelemUpdateResponseBase": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": ""
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description",
+                        "description": ""
+                    },
+                    "id": {
+                        "type": "integer",
+                        "title": "Id",
+                        "description": ""
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At",
+                        "description": "Creation time"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At",
+                        "description": "Update time"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "title": "TodoelemUpdateResponseBase"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}
