@@ -1,0 +1,32 @@
+[supervisord]
+nodaemon=true  # 在前台运行 supervisord 主进程
+pidfile=/var/run/supervisord.pid
+logfile=/var/log/supervisor/supervisord.log
+
+[program:watch-workflow]
+directory=/todolist
+autostart=true
+autorestart=true
+command=python todolist/watch/workflow.py
+stdout_events_enabled=true
+stderr_events_enabled=true
+stdout_logfile=/dev/stdout
+stderr_logfile=/dev/stderr
+stdout_maxbytes=0
+stderr_maxbytes=0
+stdout_logfile_maxbytes = 0
+stderr_logfile_maxbytes = 0
+
+[program:watch-service]
+directory=/todolist
+autostart=true
+autorestart=true
+command=python todolist/watch/service.py
+stdout_events_enabled=true
+stderr_events_enabled=true
+stdout_logfile=/dev/stdout
+stderr_logfile=/dev/stderr
+stdout_maxbytes=0
+stderr_maxbytes=0
+stdout_logfile_maxbytes = 0
+stderr_logfile_maxbytes = 0

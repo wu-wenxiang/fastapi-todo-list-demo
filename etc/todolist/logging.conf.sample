@@ -1,0 +1,34 @@
+[formatter_generic]
+class = logging.Formatter
+datefmt = %Y-%m-%d %H:%M:%S
+format = %(asctime)s [%(process)d] [%(levelname)s] %(message)s
+
+[formatters]
+keys = generic
+
+[handler_console]
+args = (sys.stdout,)
+class = StreamHandler
+formatter = generic
+
+[handlers]
+keys = console
+
+[logger_gunicorn.access]
+handlers = console
+level = INFO
+propagate = 0
+qualname = gunicorn.access
+
+[logger_gunicorn.error]
+handlers = console
+level = INFO
+propagate = 1
+qualname = gunicorn.error
+
+[logger_root]
+handlers = console
+level = INFO
+
+[loggers]
+keys = root,gunicorn.error,gunicorn.access

@@ -1,0 +1,10 @@
+bind = ["0.0.0.0:80"]
+workers = 20
+worker_class = "uvicorn.workers.UvicornWorker"
+timeout = 300
+limit_request_line = 0
+limit_request_field_size = 0
+keepalive = 5
+reuse_port = True
+proc_name = "todolist"
+logconfig = "/etc/todolist/logging.conf"
