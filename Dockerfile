@@ -30,7 +30,7 @@ RUN export LANG=C.UTF-8 \
     && apt-get clean \
     && rm -rf ~/.cache/pip
 
-COPY ./etc/ngcmp_svc/gunicorn.py.sample /etc/ngcmp_svc/gunicorn.py
+COPY ./etc/todolist/gunicorn.py.sample /etc/todolist/gunicorn.py
 COPY ./etc/todolist/todolist.conf.sample /etc/todolist/todolist.conf
 COPY ./etc/todolist/logging.conf.sample /etc/todolist/logging.conf
 COPY ./etc/todolist/supervisord.conf.sample /etc/todolist/supervisord.conf
