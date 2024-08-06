@@ -26,6 +26,9 @@ sudo mkdir -p /etc/todolist
 cp etc/todolist/todolist.conf.sample etc/todolist/todolist.conf
 sudo ln -s `pwd`/etc/todolist/todolist.conf /etc/todolist/todolist.conf
 # 按需修改相关信息
+
+alembic upgrade head
+
 uvicorn --reload todolist.main:app --host 0.0.0.0 --port 8000
 # 打开浏览器，访问 http://xxx:8000
 ```
